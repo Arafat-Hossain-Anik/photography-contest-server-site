@@ -173,11 +173,10 @@ async function run() {
             console.log(result);
             res.send(result);
         });
-        // insertion user api 
+        // post user to database
         app.post('/user', async (req, res) => {
             const userData = req.body;
             const result = await usersCollection.insertOne(userData);
-            // /console.log(`userId ${result.insertedId} were inserted`);
             res.json(result);
         })
         //update user
@@ -213,6 +212,18 @@ async function run() {
             res.json(result);
             console.log(result);
         });
+        //make admin
+        // find user 
+        app.get('/users/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email: email };
+            const user = await usersCollection.findOne(query);
+            let isAdmin = false;
+            if (user?.role === 'admin') {
+                isAdmin = true;
+            }
+            res.json({ admin: isAdmin });
+        })
 
     }
     finally {
