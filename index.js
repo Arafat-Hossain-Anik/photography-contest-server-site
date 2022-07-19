@@ -174,13 +174,11 @@ async function run() {
             res.send(result);
         });
         // post user to database
-        // app.put('/user', async (req, res) => {
-        //     const userData = req.body;
-        //     const filter = { email: userData.email };
-        //     const options = { upsert: true };
-        //     const result = await usersCollection.updateOne(filter, userData, options);
-        //     res.json(result);
-        // })
+        app.post('/user', async (req, res) => {
+            const userData = req.body;
+            const result = await usersCollection.insertOne(userData);
+            res.json(result);
+        })
         //update user
         app.put('/users', async (req, res) => {
             const email = req.body;
