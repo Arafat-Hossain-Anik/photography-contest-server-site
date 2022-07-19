@@ -174,7 +174,7 @@ async function run() {
             res.send(result);
         });
         // post user to database
-        app.post('/user', async (req, res) => {
+        app.put('/user', async (req, res) => {
             const userData = req.body;
             const result = await usersCollection.insertOne(userData);
             res.json(result);
