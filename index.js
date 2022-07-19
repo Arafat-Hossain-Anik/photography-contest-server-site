@@ -176,7 +176,9 @@ async function run() {
         // post user to database
         app.put('/user', async (req, res) => {
             const userData = req.body;
-            const result = await usersCollection.insertOne(userData);
+            const filter = { email: userData.email };
+            const options = { upsert: true };
+            const result = await usersCollection.updateOne(filter, userData, options);
             res.json(result);
         })
         //update user
