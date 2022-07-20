@@ -165,7 +165,7 @@ async function run() {
             const result = await usersCollection.updateOne(filter, updateDoc, options);
             res.send(result);
         });
-        //update user
+        //update user make admin
         app.put('/users', async (req, res) => {
             const email = req.body;
             // console.log(email);
@@ -193,7 +193,6 @@ async function run() {
             const result = await contestCollection.deleteOne(query);
             res.json(result);
         });
-        //make admin
         // find user 
         app.get('/users/:email', async (req, res) => {
             const email = req.params.email;
