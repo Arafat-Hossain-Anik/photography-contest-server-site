@@ -90,26 +90,6 @@ async function run() {
             const service = await contestCollection.findOne(query);
             res.json(service)
         })
-        // /contest/${id}/${email}/image
-        // contest image upload using image buffer
-        // app.post('/contest/:id/:email/image', async (req, res) => {
-        //     const id = req.params.id;
-        //     const email = req.params.email;
-        //     // console.log(id, email);
-        //     const image = req.files.image;
-        //     const imageData = image.data;
-        //     const encodedImage = imageData.toString('base64');
-        //     const imageBuffer = Buffer.from(encodedImage, 'base64');
-        //     const contestEntry = {
-        //         contestId: id,
-        //         userEmail: email,
-        //         contestImage: imageBuffer,
-        //         vote: []
-        //     }
-        //     const result = await contestPictureCollection.insertOne(contestEntry);
-        //     // /console.log(`userId ${result.insertedId} were inserted`);
-        //     res.json(result);
-        // })
         //cloudinary testing image upload
         app.post('/contest/:id/:email/image', async (req, res) => {
             const id = req.params.id;
