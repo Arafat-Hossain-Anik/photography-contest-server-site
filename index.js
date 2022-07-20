@@ -177,8 +177,20 @@ async function run() {
         app.post('/user', async (req, res) => {
             const userData = req.body;
             const result = await usersCollection.insertOne(userData);
-            res.json(result);
-        })
+            res.send(result);
+        });
+        // upsert user to database
+        app.put('/user', async (req, res) => {
+            const userData = req.body;
+            const email = userData.email;
+            const filter = { email: email };
+            const options = { upsert: true };
+            const updateDoc = {
+                $set: userData,
+            };
+            const result = await usersCollection.updateOne(filter, updateDoc, options);
+            res.send(result);
+        });
         //update user
         app.put('/users', async (req, res) => {
             const email = req.body;
