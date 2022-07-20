@@ -127,12 +127,10 @@ async function run() {
             const query = { contestId: id };
             const cursor = contestPictureCollection.find(query);
             const result = await cursor.toArray();
-            console.log(email);
             let resultArray = result.find(({ userEmail }) => userEmail === email);
             if (!resultArray) {
                 resultArray = { userEmail: null }
             }
-            console.log(resultArray);
             res.send(resultArray);
         })
         //photo voting
@@ -147,10 +145,6 @@ async function run() {
                 },
             };
             const result = await contestPictureCollection.updateOne(filter, updateDoc, option);
-            console.log(
-                `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
-            );
-            console.log(result);
             res.send(result);
         });
         // post user to database
@@ -184,10 +178,6 @@ async function run() {
                 },
             };
             const result = await usersCollection.updateOne(filter, updateDoc, options);
-            console.log(
-                `${result.matchedCount} document(s) matched the filter, updated ${result.modifiedCount} document(s)`,
-            );
-            console.log(result);
             res.send(result);
         });
         //read user api
@@ -202,7 +192,6 @@ async function run() {
             const query = { _id: ObjectId(id) };
             const result = await contestCollection.deleteOne(query);
             res.json(result);
-            console.log(result);
         });
         //make admin
         // find user 
